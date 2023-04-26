@@ -7,8 +7,12 @@ const cors = require("cors");
 const db = require("./db");
 
 const app =express();
+<<<<<<< Updated upstream
 
 app.use(cors());
+=======
+const productRouter = require('./routes/ProductRouter')
+>>>>>>> Stashed changes
 var corOptions ={
     origin:"https://localhost:3000"
 }
@@ -50,6 +54,11 @@ app.get("/",(req,res)=>{
 
 const PORT = process.env.PORT||3001;
 app.listen(PORT,()=>{
+<<<<<<< Updated upstream
     console.log(`Server is running on Port ${PORT}`)
+=======
+    console.log(`Server is running on Port ${PORT}`);
+>>>>>>> Stashed changes
 });
 
+app.use('/api/',productRouter);
