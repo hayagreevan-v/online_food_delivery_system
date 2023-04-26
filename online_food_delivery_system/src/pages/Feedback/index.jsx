@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import axios from 'axios';
-const url=" http://localhost:3000/feedback"
+import  axios  from 'axios';
+//const axios= require('axios')
+const url=" http://localhost:3001/feedback"
 
 const Feedback =() =>{
 

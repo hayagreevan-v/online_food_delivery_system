@@ -1,8 +1,8 @@
 //const mongoose = require('mongoose')
 
-const postSchema = require('mongoose').Schema({
+const postSchema = new require('mongoose').Schema({
     myFile:String
-});
+})
 
-module.exports= require('mongoose').model('post',postSchema)
+module.exports= require('mongoose').models.posts || require('mongoose').model('post',postSchema)
 

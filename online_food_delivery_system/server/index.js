@@ -1,6 +1,6 @@
 //import model
 //import Post from './model/post.model.js';
-const Post=require("./models/post.model.js")
+const Post = require("./models/post.model.js")
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -17,7 +17,7 @@ var corOptions ={
 
 
 /**Post: https://localhost:3000/uploads*/
-app.post("/feedback/",async(req,res)=>{
+app.post("/feedback",async(req,res)=>{
     const body=req.body;
     try{
         const newImage=await Post.create(body)
@@ -30,7 +30,7 @@ app.post("/feedback/",async(req,res)=>{
 })
 
 
-app.use(cors(corOptions));
+//app.use(cors(corOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 db.on('error',console.error.bind(console,"MongDB Connection error"))
