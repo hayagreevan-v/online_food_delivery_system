@@ -19,6 +19,7 @@ export const Header = () =>{
                     <Link to="/cart">
                         <img src={cartIcon} alt="cart"/>
                     </Link>
+                    <Link to="/feedback">Feedback</Link>
                     <Link to="/login">Log In</Link>
                     <Link to="/register">Sign Up</Link>
                 </div>

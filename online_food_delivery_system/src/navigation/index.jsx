@@ -6,6 +6,7 @@ import Register from "../pages/Register";
 import Menu from "../pages/Menu";
 import Cart from "../pages/Cart";
 import PaymentSuccess from "../pages/PaymentSuccess";
+import Feedback from "../pages/Feedback";
 
 
 const Navigation = () =>{
@@ -18,6 +19,7 @@ const Navigation = () =>{
                 <Route path="/register" element={<Register/>} />
                 <Route path="/menu" element={<Menu/>} />
                 <Route path="/cart" element={<Cart/>} />
+                <Route path="/feedback" element={<Feedback/>} />
                 <Route path="/payment-success" element={<PaymentSuccess/>} />
             </Routes>
         </BrowserRouter>
