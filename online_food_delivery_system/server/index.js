@@ -15,19 +15,10 @@ var corOptions ={
     origin:"https://localhost:3000"
 }
 
+const connect = require("./db/conn.js")
+app.use(express.json());
 
-/**Post: https://localhost:3000/uploads*/
-app.post("/feedback",async(req,res)=>{
-    const body=req.body;
-    try{
-        const newImage=await Post.create(body)
-        newImage.save();
-        res.status(201).json({msg:"New image uploaded...!"})
-    }
-    catch(error){
-        res.status(409).json({message: error.message})
-    }
-})
+
 
 
 //app.use(cors(corOptions));
@@ -47,11 +38,36 @@ app.get("/",(req,res)=>{
     catch(error){
         res.json({error})
     }
-});
+})
+
+/**Post: https://localhost:3001/feedback */
+app.post("/feedback",async(req,res)=>{
+    const body=req.body;
+    try{
+        const newImage=await Post.create(body)
+        newImage.save();
+        res.status(201).json({msg:"New image uploaded...!"})
+    }
+    catch(error){
+        res.status(409).json({message: error.message})
+    }
+})
 
 const PORT = process.env.PORT||3001;
 app.listen(PORT,()=>{
     console.log(`Server is running on Port ${PORT}`);
 });
-
+/*
+connect().then(() => {
+    try{
+        app.listen(port, () => {
+            console.log(`Server connected to http://localhost:${port}`);
+        })
+    }catch(error){
+        console.log("Can't connect to the server");
+    }
+}).catch((error) => {
+    console.log("Invalid Database Connection...!")
+})
+*/
 app.use('/api/',productRouter);

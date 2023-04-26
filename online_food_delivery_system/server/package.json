@@ -22,6 +22,7 @@
     "nodemon": "^2.0.22"
   },
   "devDependencies": {
-    "@faker-js/faker": "^7.6.0"
+    "@faker-js/faker": "^7.6.0",
+    "mongodb-memory-server": "^8.12.2"
   }
 }
