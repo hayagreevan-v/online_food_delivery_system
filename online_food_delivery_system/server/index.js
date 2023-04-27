@@ -22,8 +22,8 @@ app.use(express.json());
 
 
 //app.use(cors(corOptions));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json({limit: '100mb'}));
+app.use(bodyParser.urlencoded({limit: '100mb',extended: true}));
 db.on('error',console.error.bind(console,"MongDB Connection error"))
 
 app.get("/",(req,res)=>{
@@ -43,13 +43,15 @@ app.get("/",(req,res)=>{
 /**Post: https://localhost:3001/feedback */
 app.post("/feedback",async(req,res)=>{
     const body=req.body;
+    //console.log(req.body);
     try{
         const newImage=await Post.create(body)
-        newImage.save();
-        res.status(201).json({msg:"New image uploaded...!"})
+        newImage.save().then().catch(e => console.log(e));
+        res.status(201).json({msg:"New image uploaded...!"});
     }
     catch(error){
-        res.status(409).json({message: error.message})
+        console.log(error);
+        res.status(409).json({message: error.message});
     }
 })
 

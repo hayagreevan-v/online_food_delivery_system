@@ -26,7 +26,7 @@ function Feedback() {
     const handleFileUpload= async(e)=>{
         const file=e.target.files[0];
         const base64=await convertToBase64(file);
-        console.log(base64)
+        //console.log(base64)
         setPostImage({...postImage,myfile:base64})
 
     }
@@ -35,7 +35,7 @@ function Feedback() {
         <div className="text-white flex justify-center">
             <form onSubmit={handleSubmit} >
                 <label htmlFor="file-upload">
-                    <img src={postImage.myFile} alt=""/>
+                    <img src={postImage.myfile} alt=""/>
                 </label>
                 <input
                     type="file"
