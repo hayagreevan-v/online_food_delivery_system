@@ -29,11 +29,6 @@ db.on('error',console.error.bind(console,"MongDB Connection error"))
 app.get("/",(req,res)=>{
     try{
     res.json({message:"Welcome to Food Delivery System"});
-    Post.find({}).then(data=>{
-        res.json(data)
-    }).catch(error=>{
-        res.status(408).json({error})
-    })
     }
     catch(error){
         res.json({error})
