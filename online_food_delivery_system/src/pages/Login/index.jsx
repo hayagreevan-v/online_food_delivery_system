@@ -22,6 +22,7 @@ const LoginPage =() => {
         const authentication = getAuth();
         const database = getDatabase(app);
         let uid = '';
+        let lgDate = new Date();
         signInWithEmailAndPassword(authentication, data.email, data.password)
             .then((response) => {
                 uid = response.user.uid;
@@ -29,7 +30,8 @@ const LoginPage =() => {
                 sessionStorage.setItem('Auth token', response._tokenResponse.refreshToken)
                 window.dispatchEvent(new Event("storage"))
                 setLoading(false);
-                var lgDate = new Date();
+                alert("SignedIn Successfully");
+                
           update(ref(database, "users/" + uid), {
             last_login: lgDate,
           })
@@ -54,6 +56,7 @@ const LoginPage =() => {
                 navigate('/');
             })
             .catch((error) => {
+                console.log(error);
                 if (error.code === 'auth/wrong-password') {
                     toast.error('Wrong Password')
                 }
@@ -76,8 +79,9 @@ const LoginPage =() => {
     </div>
     <div className="mb-4">
       <label htmlFor="password" className="block mb-2">Password</label>
-      <input {...register('password')}type="password" id="password" name="password" className="w-full px-3 py-2  rounded-md bg-wheat-700 focus:outline-none focus:bg-orange-250 text-black font-bold" />
+      <input {...register('password')} type="password" id="password" name="password" className="w-full px-3 py-2  rounded-md bg-wheat-700 focus:outline-none focus:bg-orange-250 text-black font-bold" />
     </div>
+    <Button size="large" className="w-full bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline">{loading ? "loading" : 'Register'}</Button>
     <button type="submit" className="w-full bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline">Login</button>
   </form>
   <ToastContainer />

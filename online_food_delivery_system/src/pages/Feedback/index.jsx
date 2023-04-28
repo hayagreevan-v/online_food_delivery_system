@@ -7,13 +7,15 @@ const url=" http://localhost:3001/feedback"
 
 
 function Feedback() {
-
+    const [name, setName] = useState('');
+    const [review, setReview] = useState('');
     const [postImage, setPostImage]=useState({myfile:""})
 
-    const createPost=async(newImage)=>{
+    const createPost=async(postData)=>{
         try{
-            await axios.post(url,newImage)   
-
+            //await axios.post(url,newImage)
+            await axios.post(url, postData);
+            
         }catch(error){
             console.log(error)
         }
@@ -21,7 +23,12 @@ function Feedback() {
 
     const handleSubmit=(e)=>{
         e.preventDefault();
-        createPost(postImage)
+        const postData = {
+            name,
+            review,
+            myfile: postImage.myfile,
+          };
+        createPost(postData);
         console.log("Uploaded")
     }
 
@@ -44,6 +51,27 @@ function Feedback() {
                 <label htmlFor="file-upload">
                     <img src={postImage.myfile} alt=""/>
                 </label>
+                
+                <div>
+        <label htmlFor="name">Name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </div>
+      <div>
+        <label htmlFor="review">Review:</label>
+        <textarea
+          id="review"
+          name="review"
+          value={review}
+          onChange={(e) => setReview(e.target.value)}
+        ></textarea>
+      </div>
+
                 <input
                     type="file"
                     label="Image"

@@ -26,10 +26,11 @@ const Register =() =>{
             .catch((error) => {
                 if (error.code === 'auth/email-already-in-use') {
                     toast.error('Email Already In Use')
+                    alert("auth/email-already-in-use");
                 }
             })
         
-            fetch('http://localhost:8080/api/create-user', {
+            fetch('http://localhost:3001/api/create-user', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

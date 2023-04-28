@@ -29,6 +29,11 @@ db.on('error',console.error.bind(console,"MongDB Connection error"))
 app.get("/",(req,res)=>{
     try{
     res.json({message:"Welcome to Food Delivery System"});
+    Post.find({}).then(data=>{
+        res.json(data)
+    }).catch(error=>{
+        res.status(408).json({error})
+    })
     }
     catch(error){
         res.json({error})
@@ -37,11 +42,15 @@ app.get("/",(req,res)=>{
 
 /**Post: https://localhost:3001/feedback */
 app.post("/feedback",async(req,res)=>{
-    const body=req.body;
+    //const body=req.body;
+    const { name, review, myfile } = req.body;
     //console.log(req.body);
     try{
-        const newImage=await Post.create(body)
-        newImage.save().then().catch(e => console.log(e));
+        //const newImage=await Post.create(body)
+        //newImage.save().then().catch(e => console.log(e));
+        //const newPost = await Post.create({ name, review, myfile });
+        const newPost = await Post.create({ name, review, myfile });
+        newPost.save().then().catch(e => console.log(e));
         res.status(201).json({msg:"New image uploaded...!"});
     }
     catch(error){

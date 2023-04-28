@@ -1,6 +1,8 @@
 //const mongoose = require('mongoose')
 
 const postSchema = new require('mongoose').Schema({
+    name: {type:String, required:true},
+    review: {type:String, required:true},
     myfile: {type:String, required:true}
 })
 
