@@ -5,6 +5,7 @@ import { app } from "../../firebase-config";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register =() =>{
     let navigate =useNavigate();
@@ -14,30 +15,23 @@ const Register =() =>{
     const onSubmit = (data) => {
         setLoading(true);
         const authentication = getAuth();
-        let uid = '';
+        //let uid = '';
         createUserWithEmailAndPassword(authentication, data.email, data.password)
             .then((response) => {
-                uid = response.user.uid;
+                let uid = response.user.uid;
                 sessionStorage.setItem('User Id', uid);
                 sessionStorage.setItem('Auth token', response._tokenResponse.refreshToken)
                 window.dispatchEvent(new Event("storage"))
                 alert("Registered Successfully!");
-            })
-            .catch((error) => {
-                if (error.code === 'auth/email-already-in-use') {
-                    toast.error('Email Already In Use')
-                    alert("auth/email-already-in-use");
-                }
-            })
-        
-            fetch('http://localhost:3001/api/create-user', {
+
+                fetch('http://localhost:3001/api/create-user', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    email: data.email,
                     name: data.name,
+                    email: data.email,
                     _id: uid
                 })
             }).then((response) => {
@@ -61,6 +55,16 @@ const Register =() =>{
                 setLoading(false);
                 console.log(error)
             })
+
+            })
+            .catch((error) => {
+                if (error.code === 'auth/email-already-in-use') {
+                    toast.error('Email Already In Use')
+                    alert("auth/email-already-in-use");
+                }
+            })
+        
+            
     }
 
     

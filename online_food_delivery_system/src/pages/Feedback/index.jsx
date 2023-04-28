@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import avatar from '../../assets/images/profile.png'
 import  axios  from 'axios';
+import { useNavigate } from "react-router-dom";
 //const axios= require('axios')
 const url=" http://localhost:3001/feedback"
 
@@ -10,7 +11,7 @@ function Feedback() {
     const [name, setName] = useState('');
     const [review, setReview] = useState('');
     const [postImage, setPostImage]=useState({myfile:""})
-
+    const navigate = useNavigate();
     const createPost=async(postData)=>{
         try{
             //await axios.post(url,newImage)
@@ -29,7 +30,9 @@ function Feedback() {
             myfile: postImage.myfile,
           };
         createPost(postData);
-        console.log("Uploaded")
+        console.log("Uploaded");
+        alert("Submitted");
+        navigate('/');
     }
 
     const handleFileUpload= async(e)=>{

@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../../components/elements/Button";
@@ -6,23 +5,17 @@ import { app } from "../../firebase-config";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
-import {
-  getDatabase,
-  set,
-  ref,
-  update,
-} from "firebase/database"
-const LoginPage =() => {
-  let navigate = useNavigate();
+import 'react-toastify/dist/ReactToastify.css';
+
+const LoginPage = () => {
+    let navigate = useNavigate();
     const { register, handleSubmit } = useForm();
     const [loading, setLoading] = useState(false);
 
     const onSubmit = (data) => {
         setLoading(true);
         const authentication = getAuth();
-        const database = getDatabase(app);
         let uid = '';
-        let lgDate = new Date();
         signInWithEmailAndPassword(authentication, data.email, data.password)
             .then((response) => {
                 uid = response.user.uid;
@@ -30,19 +23,7 @@ const LoginPage =() => {
                 sessionStorage.setItem('Auth token', response._tokenResponse.refreshToken)
                 window.dispatchEvent(new Event("storage"))
                 setLoading(false);
-                alert("SignedIn Successfully");
-                
-          update(ref(database, "users/" + uid), {
-            last_login: lgDate,
-          })
-            .then(() => {
-              // Data saved successfully!
-              alert("LoggedIn Successfully");
-            })
-            .catch((error) => {
-              // The write failed...
-              alert(error);
-            });
+                alert("Successful Login");
                 toast.success('Successful Login!🎉', {
                     position: "top-right",
                     autoClose: 5000,
@@ -56,7 +37,6 @@ const LoginPage =() => {
                 navigate('/');
             })
             .catch((error) => {
-                console.log(error);
                 if (error.code === 'auth/wrong-password') {
                     toast.error('Wrong Password')
                 }
@@ -67,27 +47,43 @@ const LoginPage =() => {
             })
     
     }
-
-  return (
-<body className="bg-gray-900 text-white">
-<div className="flex justify-center">
-  <form className="bg-gray-800 p-10 rounded-lg">
-    <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
-    <div className="mb-4">
-      <label htmlFor="email" className="block mb-2">Username</label>
-      <input {...register('email')} type="email" id="email" name="email" className="w-full px-3 py-2  rounded-md bg-wheat-700 focus:outline-none focus:bg-orange-250 text-black font-bold" />
-    </div>
-    <div className="mb-4">
-      <label htmlFor="password" className="block mb-2">Password</label>
-      <input {...register('password')} type="password" id="password" name="password" className="w-full px-3 py-2  rounded-md bg-wheat-700 focus:outline-none focus:bg-orange-250 text-black font-bold" />
-    </div>
-    <Button size="large" className="w-full bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline">{loading ? "loading" : 'Register'}</Button>
-  </form>
-  <ToastContainer />
-</div>
-</body>
-
-  )
+    return (
+        <div className="h-screen bg-black flex  items-center justify-center">
+            <div className="rounded-lg max-w-md w-full flex flex-col items-center justify-center relative">
+                <div className="absolute inset-0 transition duration-300 animate-pink blur  gradient bg-gradient-to-tr from-rose-500 to-yellow-500"></div>
+                <div className="p-10 rounded-xl z-10 w-full h-full bg-black">
+                    <h5 className="text-3xl">Login</h5>
+                <form className="w-full space-y-6" onSubmit={handleSubmit(onSubmit)}>
+                    <div>
+                        <label 
+                        htmlFor="email"
+                        className="block text-lg font-medium text-gray-200">Email</label>
+                        <input 
+                        {...register('email')}
+                        id="email"
+                        type="email"
+                        className="block appearance-none w-full px-3 py-2 border border-gray-300 roundedn-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-200 focus:border-gray-200"
+                        />
+                    </div>
+                    <div>
+                        <label 
+                        htmlFor="password"
+                        className="block text-lg font-medium text-gray-200">Password</label>
+                        <input 
+                        {...register('password')}
+                        id="password"
+                        type="password"
+                        className="block appearance-none w-full px-3 py-2 border border-gray-300 roundedn-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-200 focus:border-gray-200"
+                        />
+                    </div>
+                    <Button size="large">{loading ? "loading" : 'Register'}</Button>
+                </form>
+                <ToastContainer />
+                </div>
+            </div>
+        </div>
+    )
 }
+
 
 export default LoginPage;

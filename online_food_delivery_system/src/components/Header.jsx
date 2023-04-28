@@ -2,7 +2,37 @@ import foody from "../assets/images/foody.png";
 import cartIcon from "../assets/icons/cart.svg";
 import { Link } from "react-router-dom";
 import Button from "./elements/Button";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+
 export const Header = ({cartCount}) =>{
+    const navigate = useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const handleLogout =() =>{
+        sessionStorage.removeItem('Auth token');
+        sessionStorage.removeItem('User Id');
+        window.dispatchEvent(new Event("storage"))
+        navigate('/');
+    }
+
+    useEffect(() =>{
+        const checkAuthToken = () =>{
+            const token = sessionStorage.getItem('Auth token');
+            if(token){
+                setIsLoggedIn(true);
+            }else{
+                setIsLoggedIn(false);
+            }
+        }
+
+        window.addEventListener('storage', checkAuthToken);
+
+        return() =>{
+            window.removeEventListener('storage', checkAuthToken);
+        }
+    },[])
+
     return (
         <nav id="header" className="bg-black text-white">
             <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
@@ -21,8 +51,17 @@ export const Header = ({cartCount}) =>{
                         {cartCount>0? <div className="rounded-full bg-yellow-400 text-white inline-flex justify-center items-center w-full absolute -top-1 -right-1">{cartCount}</div>:null}
                     </Link>
                     <Link to="/feedback">Feedback</Link>
-                    <Link to="/login">Log In</Link>
-                    <Link to="/register">Sign Up</Link>
+                    {
+                        isLoggedIn ?
+                        <Button onClick={handleLogout}>LogOut</Button> :
+                        (
+                            <>
+                            <Link to="/login">Log In</Link>
+                            <Link to="/register">Sign Up</Link>
+                            </>
+                        )
+                    }
+                    
                 </div>
             </div>
         </nav>

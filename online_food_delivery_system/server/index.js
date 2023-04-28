@@ -77,3 +77,7 @@ connect().then(() => {
 })
 */
 app.use('/api/',productRouter);
+
+
+const userRouter =require('./routes/userRouter.js')
+app.use('/api/',userRouter);
