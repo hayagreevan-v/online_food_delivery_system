@@ -41,48 +41,63 @@ function Feedback() {
     }
 
     return (
-        <div className="text-black flex justify-center">
-             
-        
-            <form onSubmit={handleSubmit} >
-            <h1 className="text-2xl font-bold mb-6 text-center">Feedback form</h1>
-            
-            <input className="e-input" type="text" placeholder="Enter Name" />
-                <label htmlFor="file-upload">
-                    <img src={postImage.myfile} alt=""/>
-                </label>
-                
-                <div>
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+        <div className="bg-gray-100 py-8">
+  <div className="max-w-md mx-auto bg-white rounded-lg overflow-hidden md:max-w-lg">
+    <div className="md:flex">
+      <div className="md:flex-shrink-0">
+        <img className="h-48 w-full object-cover md:h-full md:w-48" src={postImage.myfile} alt=""/>
       </div>
-      <div>
-        <label htmlFor="review">Review:</label>
-        <textarea
-          id="review"
-          name="review"
-          value={review}
-          onChange={(e) => setReview(e.target.value)}
-        ></textarea>
+      <div className="p-8">
+        <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Upload an image</div>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="mt-4">
+            <input
+              type="file"
+              label="Image"
+              name="myFile"
+              id='file-upload'
+              accept='.jpeg,.png,.jpg'
+              onChange={(e)=>handleFileUpload(e)}
+              className="block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+            <div className="mt-1">
+              <input
+                type="text"
+                name="name"
+                id="name"
+                autoComplete="given-name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+              />
+            </div>
+          </div>
+          <div>
+            <label htmlFor="review" className="block text-sm font-medium text-gray-700">Review</label>
+            <div className="mt-1">
+              <textarea
+                id="review"
+                name="review"
+                rows="3"
+                value={review}
+                onChange={(e) => setReview(e.target.value)}
+                className="block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+              ></textarea>
+            </div>
+          </div>
+          <div>
+            <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              Upload
+            </button>
+          </div>
+        </form>
       </div>
-
-                <input
-                    type="file"
-                    label="Image"
-                    name="myFile"
-                    id='file-upload'
-                    accept='.jpeg,.png,.jpg'
-                    onChange={(e)=>handleFileUpload(e)}
-                />
-                <button type="submit feedback" className="mt-4 px-4 py-2 bg-yellow-500 text-black rounded-lg">Submit</button>
-            </form>
-        </div>
+    </div>
+  </div>
+</div>
     )
 }
 
