@@ -22,13 +22,9 @@ const Menu=() =>{
 
 const onTabSwitch=(newActiveTab)=>{
     setActiveTab(newActiveTab);
-<<<<<<< Updated upstream
     let newIndex=0;
     let categories = products.products ? products.products.map((product) => product.name.name) : [];
     let index= categories.findIndex(newActiveTab);
-=======
-    let categories = products.products.map((product)=> product.name.name);
-    let index= categories.findIndex(category => newActiveTab === category);
     console.log(index);
     if(index>-1){
         setActiveTabIndex(index);
@@ -37,7 +33,7 @@ const onTabSwitch=(newActiveTab)=>{
     else{
         setActiveTabIndex(0);
     }
->>>>>>> Stashed changes
+
 }
 
 

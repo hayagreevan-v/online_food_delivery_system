@@ -12,7 +12,6 @@ router.get("/products",async(req,res) =>{
         res.status(400).send({error: err})
     }
 })
-<<<<<<< Updated upstream
 
 router.get("/products-by-categories",async(req,res) =>{
     try{
@@ -25,12 +24,15 @@ router.get("/products-by-categories",async(req,res) =>{
             {$project: {name: '$_id',products:1, _id:0}}
         ])
         res.status(200).send({data : products})
-=======
+    } catch(err){
+        res.status(400).send({error: err})
+    }
+})
+
 router.get("/feedback",async(req,res) =>{
     try{
         const feedback = await this.post.find()
         res.status(200).send({data : feedback})
->>>>>>> Stashed changes
     } catch(err){
         res.status(400).send({error: err})
     }

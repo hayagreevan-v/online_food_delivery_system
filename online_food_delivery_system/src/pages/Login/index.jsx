@@ -82,7 +82,6 @@ const LoginPage =() => {
       <input {...register('password')} type="password" id="password" name="password" className="w-full px-3 py-2  rounded-md bg-wheat-700 focus:outline-none focus:bg-orange-250 text-black font-bold" />
     </div>
     <Button size="large" className="w-full bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline">{loading ? "loading" : 'Register'}</Button>
-    <button type="submit" className="w-full bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline">Login</button>
   </form>
   <ToastContainer />
 </div>
