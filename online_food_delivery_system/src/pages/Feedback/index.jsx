@@ -4,6 +4,8 @@ import  axios  from 'axios';
 //const axios= require('axios')
 const url=" http://localhost:3001/feedback"
 
+
+
 function Feedback() {
 
     const [postImage, setPostImage]=useState({myfile:""})
@@ -32,8 +34,13 @@ function Feedback() {
     }
 
     return (
-        <div className="text-white flex justify-center">
+        <div className="text-black flex justify-center">
+             
+        
             <form onSubmit={handleSubmit} >
+            <h1 className="text-2xl font-bold mb-6 text-center">Feedback form</h1>
+            
+            <input className="e-input" type="text" placeholder="Enter Name" />
                 <label htmlFor="file-upload">
                     <img src={postImage.myfile} alt=""/>
                 </label>
@@ -45,13 +52,12 @@ function Feedback() {
                     accept='.jpeg,.png,.jpg'
                     onChange={(e)=>handleFileUpload(e)}
                 />
-                <button type="submit" className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg">Submit</button>
+                <button type="submit feedback" className="mt-4 px-4 py-2 bg-yellow-500 text-black rounded-lg">Submit</button>
             </form>
         </div>
     )
 }
 
-export default Feedback;
 
 function convertToBase64(file){
     return new Promise((resolve,reject)=>{
@@ -65,3 +71,5 @@ function convertToBase64(file){
         }
     })
 }
+
+export default Feedback;
