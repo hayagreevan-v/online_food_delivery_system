@@ -3,7 +3,6 @@ import Button from "../../components/elements/Button";
 import { useSelector } from "react-redux";
 import { selectAllProducts } from "../../stores/menu/productsSlice";
 import {ReactComponent as ArrowRightSvg} from "../../assets/icons/arrow-right-long-svgrepo-com.svg";
-
 import useTabSwitch from "../../hooks/useTabSwitch";
 
 const Cart =() =>{
