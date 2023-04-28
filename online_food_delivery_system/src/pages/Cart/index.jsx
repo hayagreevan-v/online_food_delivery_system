@@ -9,8 +9,6 @@ const Cart =() =>{
     const cart= useSelector(selectAllProducts);
     const tabs=['Summary','Delivery','Payment'];
     const [currentTab,handleTabSwitch]= useTabSwitch(tabs,'Summary');
-
-
     if(!cart || cart.products.length===0){
         return (
             <div className="bg-white h-full text-black flex justify-center p-4">
