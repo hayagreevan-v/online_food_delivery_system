@@ -8,9 +8,9 @@ import { Tabs } from "../../components/Tabs";
 const Menu=() =>{
     const dispatch = useDispatch();
     const products = useSelector(selectAllProducts);
-    const {activeTab,setActiveTab}= useState('');
+    const [activeTab,setActiveTab]= useState('');
     //const {categories,setCategories}=useState([]);
-    const {activeTabIndex,setActiveTabIndex}= useState(0);
+    const [activeTabIndex,setActiveTabIndex]= useState(0);
 
     useEffect(() =>{
         dispatch(fetchProducts())
@@ -23,7 +23,7 @@ const Menu=() =>{
 const onTabSwitch=(newActiveTab)=>{
     setActiveTab(newActiveTab);
     let newIndex=0;
-    let categories = products.products.map((product)=> product.name.name);
+    let categories = products.products ? products.products.map((product) => product.name.name) : [];
     let index= categories.findIndex(newActiveTab);
 }
 
@@ -36,20 +36,22 @@ const onTabSwitch=(newActiveTab)=>{
                 <div className="menu-wrapper">
                     
                     {
-                        products.products &&
+                        Array.isArray(products.products) && products.products.length > 0 ?
                         <Tabs
                         list={products.products.map((product)=> product.name.name)}
                         activeTab={activeTab}
                         onTabSwitch={onTabSwitch}
                         />
+                        :<div>Waiting for Server</div>
                     }
                     <div className="flex flex-row mx-5">
                     {
-                     products.products && products.products[activeTabIndex].products.map((product, index) =>{
+                     products.products && Array.isArray(products.products) && products.products.length > 0 ? 
+                     products.products[activeTabIndex].products.map((product, index) =>{
                         return(
                             <ProductDetailCard key={index} product={product} onAddProduct={onAddProduct}/>
                         )
-                    })
+                    }): <div>Waiting for data from Server</div>
                     }
                     </div>
                 </div>
