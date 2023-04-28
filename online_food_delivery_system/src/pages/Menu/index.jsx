@@ -20,6 +20,14 @@ const Menu=() =>{
         dispatch(addToCart(product))
     }
 
+const onTabSwitch=(newActiveTab)=>{
+    setActiveTab(newActiveTab);
+    let newIndex=0;
+    let categories = products.products.map((product)=> product.name.name);
+    let index= categories.findIndex(newActiveTab);
+}
+
+
     return (
         <div className="bg-white">
             {
@@ -32,7 +40,7 @@ const Menu=() =>{
                         <Tabs
                         list={products.products.map((product)=> product.name.name)}
                         activeTab={activeTab}
-                        onTabSwitch={setActiveTab}
+                        onTabSwitch={onTabSwitch}
                         />
                     }
                     <div className="flex flex-row mx-5">
