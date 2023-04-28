@@ -3,19 +3,15 @@ import Button from "../../components/elements/Button";
 import { useSelector } from "react-redux";
 import { selectAllProducts } from "../../stores/menu/productsSlice";
 import {ReactComponent as ArrowRightSvg} from "../../assets/icons/arrow-right-long-svgrepo-com.svg";
-<<<<<<< Updated upstream
 import useTabSwitch from "../../hooks/useTabSwitch";
 
 const Cart =() =>{
     const cart= useSelector(selectAllProducts);
     const tabs=['Summary','Delivery','Payment'];
     const [currentTab,handleTabSwitch]= useTabSwitch(tabs,'Summary');
-=======
 const Cart =() =>{
     const cart= useSelector(selectAllProducts);
     const tabs=['Summary','Delivery','Payment'];
-
->>>>>>> Stashed changes
 
     if(!cart || cart.products.length===0){
         return (
