@@ -21,6 +21,7 @@ const Register =() =>{
                 sessionStorage.setItem('User Id', uid);
                 sessionStorage.setItem('Auth token', response._tokenResponse.refreshToken)
                 window.dispatchEvent(new Event("storage"))
+                alert("Registered Successfully!");
             })
             .catch((error) => {
                 if (error.code === 'auth/email-already-in-use') {

@@ -6,7 +6,12 @@ import { app } from "../../firebase-config";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
-
+import {
+  getDatabase,
+  set,
+  ref,
+  update,
+} from "firebase/database"
 const LoginPage =() => {
   let navigate = useNavigate();
     const { register, handleSubmit } = useForm();
@@ -15,6 +20,7 @@ const LoginPage =() => {
     const onSubmit = (data) => {
         setLoading(true);
         const authentication = getAuth();
+        const database = getDatabase(app);
         let uid = '';
         signInWithEmailAndPassword(authentication, data.email, data.password)
             .then((response) => {
@@ -23,6 +29,18 @@ const LoginPage =() => {
                 sessionStorage.setItem('Auth token', response._tokenResponse.refreshToken)
                 window.dispatchEvent(new Event("storage"))
                 setLoading(false);
+                var lgDate = new Date();
+          update(ref(database, "users/" + uid), {
+            last_login: lgDate,
+          })
+            .then(() => {
+              // Data saved successfully!
+              alert("LoggedIn Successfully");
+            })
+            .catch((error) => {
+              // The write failed...
+              alert(error);
+            });
                 toast.success('Successful Login!🎉', {
                     position: "top-right",
                     autoClose: 5000,
