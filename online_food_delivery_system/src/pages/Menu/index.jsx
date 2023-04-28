@@ -28,11 +28,11 @@ const Menu=() =>{
                         />
                     }
                     {
-                        products.products && products.products[0].products.map((product, index) =>{
+                        Array.isArray(products.products) && products.products.length > 0 ? products.products[0].products.map((product, index) =>{
                             return(
                                 <ProductDetailCard key={index} product={product}/>
                             )
-                        })
+                        }): <div>Waiting for data from Server</div>
                     }
                 </div>
             }
@@ -41,3 +41,26 @@ const Menu=() =>{
 }
 
 export default Menu;
+
+/*
+Array.isArray(products) && products.length > 0 ?
+                        products.map((menuCategory, index) =>{
+                            return(
+                                <>
+                                    <h2>{menuCategory.data.name.name}</h2>
+                                    <div className="products-list">
+                                        {
+                                            menuCategory.data.products.map((product, index) =>{
+                                                return(
+                                                    <div>{product.name}</div>
+
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                </>
+                            )
+                        }): 
+                        <div>No products found</div>
+
+*/
