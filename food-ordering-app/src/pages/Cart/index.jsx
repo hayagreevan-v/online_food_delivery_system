@@ -7,11 +7,15 @@ import { ReactComponent as ArrowRightSvg } from "../../assets/icons/arrow-right-
 import { AddressForm } from "../../components/AddressForm";
 import { ProductsSummary } from "../../components/ProductsSummary";
 import { StripeWrapper } from "../../components/PaymentForm";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../../stores/cart/cartSlice";
+
 
 const Cart = () => {
     const cart = useSelector(cartProducts);
     const tabs= ['Summary', 'Delivery', 'Payment'];
     const [currentTab, handleTabSwitch] = useTabSwitch(tabs, 'Summary');
+    const dispatch = useDispatch();
 
     if (!cart || cart.length === 0) {
         return (
@@ -26,6 +30,9 @@ const Cart = () => {
             <Tabs list={tabs} onTabSwitch={handleTabSwitch} activeTab={currentTab} />
             <div className={`tabs ${currentTab !== 'Summary' ? 'hidden' : ''}`}>
                 <ProductsSummary />
+                <div className="flex justify-start p-2">
+                    <Button variant="dark" className="flex items-center" onClick={() => dispatch(clearCart())}><span className="mr-1">Clear Cart</span></Button>
+                </div>
                 <div className="flex justify-end p-2">
                     <Button variant="dark" className="flex items-center" onClick={()=>handleTabSwitch('Delivery')}><span className="mr-1">Next</span><ArrowRightSvg /></Button>
                 </div>
@@ -36,6 +43,7 @@ const Cart = () => {
             <div className={`tabs ${currentTab !== 'Payment' ? 'hidden' : ''}`}>
                 <StripeWrapper />
             </div>
+
         </div>
     )
 }
