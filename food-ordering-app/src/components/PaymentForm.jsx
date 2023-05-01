@@ -95,7 +95,7 @@ const handleSubmit = (e) => {
     const orderData = {
         //paymentMethodType: 'card',
         orderItems: cart,
-        user: sessionStorage.getItem('User Id'),
+        user: 'Hayagreevan',
         shippingAddress: address,
     };
     createOrder(orderData);
