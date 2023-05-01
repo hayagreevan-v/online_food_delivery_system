@@ -1,6 +1,16 @@
 import Button from "./elements/Button";
+import React from 'react';
+import {useNavigate} from 'react-router-dom';
+
+
 
 export const Banner = () => {
+    let navigate = useNavigate(); 
+  const routeChange = () =>{ 
+    //let navigate = useNavigate();
+    let path = "/menu"; 
+    navigate(path);
+  }
     return (
         <div className="banner w-full md:w-2/3 px-7 mx-auto relative flex items-center-justify-between">
             <div className="banner-deescription w-full md:w-1/2 p-3">
@@ -11,7 +21,7 @@ export const Banner = () => {
                     Get Started Today!
                 </p>
                 <div className="btn-container">
-                    <Button>Order Now</Button>
+                    <Button onClick={routeChange}>Order Now</Button>
                     <a href="/menu" className="text-yellow-400 hover:text-yellow-500 font-bold text-decoration-line px-3">
                         See Menu
                     </a>
