@@ -7,6 +7,7 @@ import Menu from "../pages/Menu";
 import Cart from "../pages/Cart";
 import PaymentSuccess from "../pages/PaymentSuccess";
 import Feedback from "../pages/Feedback";
+import Footer from "../components/Footer";
 import { useSelector } from "react-redux";
 import { cartProducts } from "../stores/cart/cartSlice";
 
@@ -24,7 +25,9 @@ const Navigation = () =>{
                 <Route path="/cart" element={<Cart/>} />
                 <Route path="/feedback" element={<Feedback/>} />
                 <Route path="/payment-success" element={<PaymentSuccess/>} />
+    
             </Routes>
+            <Footer/>
         </BrowserRouter>
     )
 }
