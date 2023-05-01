@@ -44,11 +44,11 @@ function Feedback() {
     }
 
     return (
-        <div className="bg-gray-100 py-8">
+        <div className="bg-gray-800 py-8">
   <div className="max-w-md mx-auto bg-white rounded-lg overflow-hidden md:max-w-lg">
     <div className="md:flex">
       <div className="md:flex-shrink-0">
-        <img className="h-48 w-full object-cover md:h-full md:w-48" src={postImage.myfile} alt=""/>
+        <img className="h-48 w-full object-cover md:h-full md:w-48" src={postImage.myfile} alt="Image"/>
       </div>
       <div className="p-8">
         <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Upload an image</div>

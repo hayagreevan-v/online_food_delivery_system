@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import {incrementProductAmount, decrementProductAmount } from "../stores/cart/cartSlice";
+import {incrementProductAmount, decrementProductAmount, clearCart } from "../stores/cart/cartSlice";
 
 export const ProductsSummaryCard = ({ product }) => {
     const dispatch = useDispatch();
