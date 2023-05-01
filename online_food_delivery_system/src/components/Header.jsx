@@ -43,7 +43,8 @@ export const Header = ({cartCount}) =>{
                 </div>
                 <div className="nav-menu-wrapper flex items-center justify-between space-x-10">
                     <Link to="/" className="text-xl">Home</Link>
-                    <Link to="#about" className="text-xl">About</Link>
+                    <Link to="./About" className="text-xl">About</Link>
+                    <Link to ="./Menu" className="text-xl">Menu</Link>
                 </div>
                 <div className="flex items-center justify-center space-x-4">
                     <Link to="/cart" className="mr-4 relative">
