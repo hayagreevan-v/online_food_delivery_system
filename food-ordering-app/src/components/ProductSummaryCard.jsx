@@ -14,7 +14,7 @@ export const ProductsSummaryCard = ({ product }) => {
                 <p className="text-gray-600">{product.desciption}</p>
             </div>
             <div className="product-price-qt flex flex-col items-center justify-center">
-                <div className="price">{`${product.price}$`}</div>
+                <div className="price">{`Rs.${product.price}`}</div>
                 <div className="quantity flex">
                     <button className="p-1" disabled={product.amount <= 0} onClick={() => dispatch(decrementProductAmount(product))}>-</button>
                     <span className="p-1">{product.amount}</span>

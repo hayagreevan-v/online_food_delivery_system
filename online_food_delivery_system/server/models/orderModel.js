@@ -3,39 +3,44 @@ const mongoose = require("mongoose");
 const orderSchema = mongoose.Schema(
     {
       user: {
-        type: mongoose.Schema.Types.ObjectId,
+        //type: mongoose.Schema.Types.ObjectId,
+        type:String,
         required: false,
         ref: "User",
       },
       orderItems: [
         {
+          _id: {type: String, required: true},
           name: { type: String, required: true },
-          amount: { type: Number, required: true },
-          imageUrl: { type: String, required: true },
+          adjective: { type: String, required: true },
+          desciption: { type: String, required: true },
           price: { type: Number, required: true },
-          product: {
+          imageUrl: { type: String, required: true },
+          amount: {type: Number, required: true },
+          /*product: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
             ref: "Product",
-          },
+          },*/
         },
       ],
       shippingAddress: {
         address: { type: String, required: true },
         city: { type: String, required: true },
-        postalCode: { type: String, required: true },
+        state: { type: String, required: true },
         country: { type: String, required: true },
+        postalCode: { type: String, required: true },
       },
       paymentMethod: {
         type: String,
         required: true,
-      },
+      },/*
       paymentResult: {
         id: { type: String },
         status: { type: String },
         update_time: { type: String },
         email_address: { type: String },
-      },
+      }, */
       taxPrice: {
         type: Number,
         required: true,
@@ -55,7 +60,7 @@ const orderSchema = mongoose.Schema(
         type: Boolean,
         required: true,
         default: false,
-      },
+      },/*
       paidAt: {
         type: Date,
       },
@@ -66,7 +71,7 @@ const orderSchema = mongoose.Schema(
       },
       deliveredAt: {
         type: Date,
-      },
+      }, */
     },
     {
       timestamps: true,

@@ -6,6 +6,7 @@ import { getAddress, clearAddress } from "../stores/userInfo/addressSlice";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import Button from "./elements/Button";
+import axios from "axios";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
@@ -25,7 +26,7 @@ const PaymentForm = () => {
     const navigate = useNavigate();
     const elements = useElements();
     const stripe = useStripe();
-
+/*
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -69,7 +70,84 @@ const PaymentForm = () => {
 
         setLoading(false);
     }
+*/
 
+const url="http://localhost:3001/create-payment-intent"
+const createOrder = async(orderData)=>{
+    setLoading(true);
+    try{
+        await axios.post(url,orderData);
+    }catch(error){
+        console.log(error);
+    }
+}
+const handleSubmit = (e) => {
+    e.preventDefault();
+    const orderData = {
+        //paymentMethodType: 'card',
+        orderItems: cart,
+        user: 'Hayagreevan',
+        shippingAddress: address,
+    };
+    createOrder(orderData);
+    // Dispatch clearAddress and clearCart actions
+    dispatch(clearAddress());
+    dispatch(clearCart());
+    // Navigate to the payment success page
+    navigate('/payment-success');
+    setLoading(false);
+}
+    /*
+    setLoading(true);
+    try {
+         await fetch('http://localhost:3001/create-payment-intent', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                paymentMethodType: 'card',
+                orderItems: cart,
+                userId: '',
+                shippingAddress: address
+            })
+        }).then(r => r.json());
+            // Dispatch clearAddress and clearCart actions
+            dispatch(clearAddress());
+            dispatch(clearCart());
+            // Navigate to the payment success page
+            navigate('/payment-success');
+          
+          
+          
+          
+          
+          
+          
+          
+
+        const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(
+            clientSecret, {
+                payment_method: {
+                    card: elements.getElement(CardElement)
+                }
+            }
+        )
+        if (backeEndError || stripeError) {
+            setError(backeEndError || stripeError)
+        } else if (paymentIntent.status === 'succeeded') {
+            dispatch(clearAddress());
+            dispatch(clearCart());
+            navigate('/payment-success');
+        }
+            
+    } catch(err) {
+        console.log(err);
+    }
+
+    setLoading(false);
+}
+*/
     return (
         <form className="md:-2/3 md:mx-auto px-2 pt-1" id="payment-form" onSubmit={handleSubmit}>
             <label htmlFor="card-element" className="pt-4 text-2xl md:text-center">Please enter your card details</label>

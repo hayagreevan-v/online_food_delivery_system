@@ -8,6 +8,14 @@ const db = require("./db");
 
 const app =express();
 
+const calculateOrderAmount =(orderItems) =>{
+    const initialValue=0;
+    const itemsPrice= orderItems.reduce(
+        (previousValue, currentValue) =>
+        previousValue+currentValue.price * currentValue.amount, initialValue
+    );
+    return itemsPrice;
+}
 app.use(cors());
 
 const productRouter = require('./routes/ProductRouter')
@@ -19,7 +27,46 @@ const connect = require("./db/conn.js")
 app.use(express.json());
 
 
+const env = require('dotenv').config({path: '../.env'});
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
+const Order = require('./models/orderModel.js');
+app.post('/create-payment-intent',async(req,res) => {
+    try{
+        const{ orderItems, user, shippingAddress} = req.body;
+        const totalPrice = calculateOrderAmount(orderItems);
+        console.log(req.body);
+        /*const paymentIntent = await stripe.paymentIntents.create({
+            amount : totalPrice,
+            currency: 'inr'
+        })
+        */
+
+        const taxPrice=0;
+        const shippingPrice=0;
+        //TODO: Order Details
+        const newOrder = await Order.create({
+            user,
+            orderItems,
+            shippingAddress,
+            paymentMethod: 'CASH',
+            taxPrice,
+            shippingPrice,
+            totalPrice,
+            isPaid: false,
+
+        });
+        newOrder.save().then().catch(e => console.log(e));
+        res.status(201).json({msg:"Order Placed...!"});
+        //res.send({
+        //    clientSecret: paymentIntent.client_secret
+        //})
+    }catch(e){
+        res.status(400).json({
+            error: {message: e.message}
+        })
+    }
+})
 
 //app.use(cors(corOptions));
 app.use(bodyParser.json({limit: '100mb'}));
@@ -30,6 +77,11 @@ app.get("/",(req,res)=>{
     try{
     res.json({message:"Welcome to Food Delivery System"});
     Post.find({}).then(data=>{
+        res.json(data)
+    }).catch(error=>{
+        res.status(408).json({error})
+    })
+    Order.find({}).then(data=>{
         res.json(data)
     }).catch(error=>{
         res.status(408).json({error})
@@ -79,5 +131,6 @@ connect().then(() => {
 app.use('/api/',productRouter);
 
 
-const userRouter =require('./routes/userRouter.js')
+const userRouter =require('./routes/userRouter.js');
+const { initial } = require("lodash");
 app.use('/api/',userRouter);
