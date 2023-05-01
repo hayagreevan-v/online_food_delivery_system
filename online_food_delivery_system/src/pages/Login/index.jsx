@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const LoginPage = () => {
+const Login = () => {
     let navigate = useNavigate();
     const { register, handleSubmit } = useForm();
     const [loading, setLoading] = useState(false);
@@ -23,7 +23,7 @@ const LoginPage = () => {
                 sessionStorage.setItem('Auth token', response._tokenResponse.refreshToken)
                 window.dispatchEvent(new Event("storage"))
                 setLoading(false);
-                alert("Successful Login");
+                alert("Logged in Successfully!");
                 toast.success('Successful Login!🎉', {
                     position: "top-right",
                     autoClose: 5000,
@@ -76,7 +76,7 @@ const LoginPage = () => {
                         className="block appearance-none w-full px-3 py-2 border border-gray-300 roundedn-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-200 focus:border-gray-200"
                         />
                     </div>
-                    <Button size="large">{loading ? "loading" : 'Register'}</Button>
+                    <Button size="large">{loading ? "loading" : 'Login'}</Button>
                 </form>
                 <ToastContainer />
                 </div>
@@ -85,5 +85,4 @@ const LoginPage = () => {
     )
 }
 
-
-export default LoginPage;
+export default Login;

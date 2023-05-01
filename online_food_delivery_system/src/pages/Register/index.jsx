@@ -4,34 +4,41 @@ import Button from "../../components/elements/Button";
 import { app } from "../../firebase-config";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Register =() =>{
-    let navigate =useNavigate();
-    const {register, handleSubmit} = useForm();
-    const[loading,setLoading] =useState(false);
+const Register = () => {
+    let navigate = useNavigate();
+    const { register, handleSubmit } = useForm();
+    const [loading, setLoading] = useState(false);
 
     const onSubmit = (data) => {
         setLoading(true);
         const authentication = getAuth();
-        //let uid = '';
+        let uid = '';
         createUserWithEmailAndPassword(authentication, data.email, data.password)
             .then((response) => {
-                let uid = response.user.uid;
+                uid = response.user.uid;
                 sessionStorage.setItem('User Id', uid);
                 sessionStorage.setItem('Auth token', response._tokenResponse.refreshToken)
                 window.dispatchEvent(new Event("storage"))
                 alert("Registered Successfully!");
-
-                fetch('http://localhost:3001/api/create-user', {
+                navigate('/');
+            })
+            .catch((error) => {
+                if (error.code === 'auth/email-already-in-use') {
+                    toast.error('Email Already In Use')
+                }
+            })
+        
+            fetch('http://localhost:3001/api/create-user', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    name: data.name,
                     email: data.email,
+                    name: data.name,
                     _id: uid
                 })
             }).then((response) => {
@@ -55,19 +62,7 @@ const Register =() =>{
                 setLoading(false);
                 console.log(error)
             })
-
-            })
-            .catch((error) => {
-                if (error.code === 'auth/email-already-in-use') {
-                    toast.error('Email Already In Use')
-                    alert("auth/email-already-in-use");
-                }
-            })
-        
-            
     }
-
-    
     return (
         <div className="h-screen bg-black flex  items-center justify-center">
             <div className="rounded-lg max-w-md w-full flex flex-col items-center justify-center relative">

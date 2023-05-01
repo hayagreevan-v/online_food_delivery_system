@@ -1,11 +1,12 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { ProductPreviewCard } from "./ProductPreviewCard";
-import Carousel from "react-multi-carousel";
+import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { useDispatch } from "react-redux";
 import { addToCart } from "../stores/cart/cartSlice";
 
-export const ProductsPreview =() =>{
+
+export const ProductsPreview = () => {
     const [products, setProducts] = useState([]);
     const dispatch = useDispatch();
 
@@ -31,22 +32,23 @@ export const ProductsPreview =() =>{
 
     useEffect(() => {
         fetch('http://localhost:3001/api/products')
-        .then(response => response.json())
-        .then(data => setProducts(data?.data))
-        .catch(e => console.log(e))
-    }, [] )
+            .then(response => response.json())
+            .then(data => setProducts(data?.data))
+            .catch(e => console.log(e))
+    }, [])
 
-    const onAddProduct =(product) =>{
+    const onAddProduct = (product) => {
         dispatch(addToCart(product))
     }
-    return(
+    
+    return (
         <div className="container mx-auto pb-4 w-2/3 text-white bg-black">
             <Carousel responsive={responsive}>
             {
-                products.length>0 && products.map((product, index) =>{
-                    return(
+                products.length > 0 && products.map((product, index) => {
+                    return (
                         <div className="w-full p-3">
-                            <ProductPreviewCard key={index} product={product} onAddProduct={onAddProduct}/>
+                            <ProductPreviewCard key={index} product={product} onAddProduct={onAddProduct} />
                         </div>
                     )
                 })

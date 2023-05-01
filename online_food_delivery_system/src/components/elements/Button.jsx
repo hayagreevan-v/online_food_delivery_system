@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-function getClassName({className }){
+function getClassName({ className}) {
     return clsx(
         'text-white text-lg font-bold rounded-xl transition duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-opacity-50',
         className
@@ -19,18 +19,18 @@ secondary: 'bg-tomato focus:ring-tomato',
 dark: 'bg-black focus:ring-white',
 };
 
-const Button =({
+const Button = ({ 
     children,
     className,
-    size='small',
-    variant='primary',
+    size = 'small',
+    variant = 'primary',
     ...rest
-}) =>{
-    return(
+ }) => {
+    return (
         <button className={clsx(
             sizes[size],
             variants[variant],
-            getClassName({className})
+            getClassName({ className })
         )}
         {...rest}
         >
@@ -38,4 +38,5 @@ const Button =({
         </button>
     )
 }
+
 export default Button;
