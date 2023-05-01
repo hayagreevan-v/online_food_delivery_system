@@ -12,7 +12,7 @@ export const About = () => {
                     <strong>CS19443 Database Management System Project.</strong><br></br>
                     Our project is a digital platform that allows customers to place orders for food from various restaurants or food establishments through the internet. The system typically consists of a website and mobile app that enables customers to browse menus, choose items, and pay for their orders. The common features available in our project is menu management, order management, payment processing, delivery management and customer management. Additionally the users can also give their feedback and reviews through our app.
                     The project was built and deployed using  
-                         <strong> MERN Stack(React for Front end and MongoDB,Express and Node JS for Back end)</strong><br/>
+                         <strong> MERN Stack(React for Frontend and MongoDB, ExpressJS and NodeJS for Backend)</strong><br/>
                          <br></br>
                          Developed by
                         Team B6: <br></br><strong>Keerthana J - 210701118</strong> <br></br> <strong>Hayagreevan V - 210701080</strong> 
