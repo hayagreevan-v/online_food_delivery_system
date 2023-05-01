@@ -15,7 +15,7 @@ export const About = () => {
                          <strong> MERN Stack(React for Front end and MongoDB,Express and Node JS for Back end)</strong><br/>
                          <br></br>
                          Developed by
-                        Team B6 - <strong>Keerthana J (210701118)</strong>  and <strong>Hayagreevan V (210701080)</strong> 
+                        Team B6: <br></br><strong>Keerthana J - 210701118</strong> <br></br> <strong>Hayagreevan V - 210701080</strong> 
                     </p>
                 </div>
                 <div className="flex items-center justify-center">
