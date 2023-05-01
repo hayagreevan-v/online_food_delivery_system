@@ -3,7 +3,7 @@ const PaymentSuccess = () => {
     return (
         <div className="max-w-lg mx-auto p-4">
             <Alert variant="success">
-                Your Order placed successfully
+                Your Order placed successfully. It will reach you within a hour
             </Alert>
         </div>
     )
