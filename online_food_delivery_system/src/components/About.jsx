@@ -8,8 +8,9 @@ export const About =() =>{
                     <p className="text-lg">
                         Online Food Delivery System created using MERN (MongoDB, ExpressJs, ReactJs, NodeJs) 
                         for CS19443 Database Management System Project.<br/>
-                        Team B6 - <strong>Keerthana J (210701118)</strong>  and <strong>Hayagreevan V (210701080)</strong> 
+                        Team B6 - <strong>Keerthana J (210701118)</strong>  and <strong>Hayagreevan V (210701080) hello</strong> 
                     </p>
+                    
                 </div>
                 <div className="flex items-cente justify-center">
                     <img src={aboutImage} alt="" className="w-[400px] h-[400px] object-cover" />
