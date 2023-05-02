@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import Button from "./elements/Button";
 import axios from "axios";
+import { ProductsBill } from "./productBill";
+
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
@@ -160,7 +162,15 @@ const handleSubmit = (e) => {
 */
     return (
         <form className="md:-2/3 md:mx-auto px-2 pt-1" id="payment-form" onSubmit={handleSubmit}>
+            <div className="flex flex-col">
+            { cart && cart?.map((product, index) => {
+                return (
+                    <ProductsBill product={product} key={index} />
+                )
+            })}
+            </div>
             <label htmlFor="card-element" className="pt-4 text-2xl md:text-center">Amount to be Paid : {calculateOrderAmount(cart)}</label>
+            
             <div className="my-4">
                 <CardElement id="card-element" />
             </div>

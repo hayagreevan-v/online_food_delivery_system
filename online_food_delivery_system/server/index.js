@@ -35,7 +35,7 @@ app.post('/create-payment-intent',async(req,res) => {
     try{
         const{ orderItems, user, shippingAddress} = req.body;
         const totalPrice = calculateOrderAmount(orderItems);
-        console.log(req.body);
+        //console.log(req.body);
         /*const paymentIntent = await stripe.paymentIntents.create({
             amount : totalPrice,
             currency: 'inr'
