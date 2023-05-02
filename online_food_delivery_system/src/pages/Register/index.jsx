@@ -24,14 +24,7 @@ const Register = () => {
                 window.dispatchEvent(new Event("storage"))
                 alert("Registered Successfully!");
                 navigate('/');
-            })
-            .catch((error) => {
-                if (error.code === 'auth/email-already-in-use') {
-                    toast.error('Email Already In Use')
-                }
-            })
-        
-            fetch('http://localhost:3001/api/create-user', {
+                fetch('http://localhost:3001/api/create-user', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -39,7 +32,7 @@ const Register = () => {
                 body: JSON.stringify({
                     email: data.email,
                     name: data.name,
-                    _id: uid
+                    _id: uid,
                 })
             }).then((response) => {
                 if (response.status === 200) {
@@ -62,6 +55,14 @@ const Register = () => {
                 setLoading(false);
                 console.log(error)
             })
+            })
+            .catch((error) => {
+                if (error.code === 'auth/email-already-in-use') {
+                    toast.error('Email Already In Use')
+                }
+            })
+        
+            
     }
     return (
         <div className="h-screen bg-black flex  items-center justify-center">
