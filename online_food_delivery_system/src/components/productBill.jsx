@@ -9,13 +9,13 @@ export const ProductsBill = ({ product }) => {
                 <img src={product.imageUrl} alt={product.name} />
             </div>
             <div className="product-info">
-                <h3>{product.name}</h3>
-                <p className="text-gray-600">{product.desciption}</p>
+                <h1><b>{product.name}</b></h1>
+               
             </div>
             <div className="product-price-qt flex flex-col items-center justify-center">
-                <div className="price">{`Rs.${product.price}`}</div>
+                <div className="price"><b>Price : </b>{`Rs.${product.price}`}</div>
                 <div className="quantity flex">
-                    <span className="p-1">{product.amount}</span>
+                    <span className="p-2"><b>Quantity : </b>{product.amount}</span>
                 </div>
             </div>
         </div>

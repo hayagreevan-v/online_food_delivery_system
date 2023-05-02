@@ -161,7 +161,7 @@ const handleSubmit = (e) => {
 }
 */
     return (
-        <form className="md:-2/3 md:mx-auto px-2 pt-1" id="payment-form" onSubmit={handleSubmit}>
+        <form className="md:-2/3 md:mx-auto px-14 pt-1" id="payment-form" onSubmit={handleSubmit}>
             <div className="flex flex-col">
             { cart && cart?.map((product, index) => {
                 return (
@@ -169,12 +169,15 @@ const handleSubmit = (e) => {
                 )
             })}
             </div>
-            <label htmlFor="card-element" className="pt-4 text-2xl md:text-center">Amount to be Paid : {calculateOrderAmount(cart)}</label>
+            <label htmlFor="card-element" className="pt-4 text-1.5xl md:text-center"><b>Estimated amount : </b>Rs. {calculateOrderAmount(cart)}</label><br></br>
+            <label htmlFor="card-element" className="pt-4 text-1.5xl md:text-center"><b> CGST            : </b>Rs. 150</label><br></br>
+            <label htmlFor="card-element" className="pt-4 text-1.5xl md:text-center"><b> SGST            : </b>Rs. 50</label><br></br>
+            <label htmlFor="card-element" className="pt-4 text-1.5xl md:text-center"><b> Total amount    : </b>Rs. {calculateOrderAmount(cart)+200}</label>
             
             <div className="my-4">
                 <CardElement id="card-element" />
             </div>
-            <div className="flex justify-center p-2">
+            <div className="flex justify-center p-0.5 mb-6" >
                 <Button type="submit" disbled={loading}>
                     {
                         loading ?
